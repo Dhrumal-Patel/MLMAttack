@@ -354,7 +354,7 @@ def main():
     # Initialize model
     num_labels = 4 if (args.dataset == 'agnews') else 2
     if (args.type == 'adv'):
-        joint_model = torch.load(args.clean_model_path).to('cuda')
+        joint_model = torch.load(args.clean_model_path, weights_only=False).to('cuda')
     else:
         joint_model = MLMAttacker(args.model_name, num_labels, args.target_label).to('cuda')
         if (args.type == 'backdoor'):
@@ -393,4 +393,5 @@ if __name__ == "__main__":
 
 
 # python train.py --dataset sst2 --model_name bert-base-uncased --epochs 1 --lr_model 2e-5 --batch 4 --type clean --output_model_path C:/TAI/MLMAttack-main/results/clean/sst2/bert-base-uncased.pkl
+
 
